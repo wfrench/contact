@@ -44,4 +44,5 @@ bin/rails generate controller Contact add delete search
 ## Create our databases
 5. create databases
   - bin/rails db:create
+  - bin/rails db:migrate
   

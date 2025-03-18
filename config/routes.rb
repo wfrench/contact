@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  post 'add', action: :add, controller: 'contact'
-  get 'delete', action: :delete, controller: 'contact'
-  get 'search', action: :search, controller: 'contact'
+  post "add", action: :add, controller: "contact"
+  delete "delete", action: :delete, controller: "contact"
+  get "search", action: :search, controller: "contact"
 end

@@ -1,24 +1,47 @@
-# README
+# Contact Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Working with the backend
 
-Things you may want to cover:
+Comments: 
+ - Would normally create a spec for the API and would go REST
+ - Generally go with RSpec for tests, but just used the generated unit tests
+   - Would DRY up the tests and use factories
+ - Let most exceptions just bubble through, normally would do better error handling
+ - The goal here was to use the generator to do most of the work to save time
 
-* Ruby version
+Starting up the backend.  Will run on port 3000
+```
+docker compose up
+```
 
-* System dependencies
+### Adding a contact
+```
+curl 'http://localhost:3000/add' --data '{ "name": "required name", "email": "required@email.com" }'
+```
 
-* Configuration
+### Delete a contact
+```
+curl 'localhost:3000/delete' --data '{ "email": "required@email.com" }'
+```
 
-* Database creation
+### Search for contact
+curl 'localhost:3000/search?name=partial_string'
 
-* Database initialization
+## Running Tests
+Ensure we have the test databases setup
+```
+docker compose run -e RAILS_ENV=test backend bin/rake db:test:prepare
+```
 
-* How to run the test suite
+Run the tests
+```
+docker compose run backend bin/rake test
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the rubocop
+```
+docker compose run backend bin/rubocop
+```
 
-* Deployment instructions
 
-* ...
+
