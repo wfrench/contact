@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: Test User
-  email: me@there.com
+  name: John Doe
+  email: example@example.com
 
 two:
-  name: Test User 2
-  email: email@somewhere.come
+  name: Jack Bauer
+  email: assassin@24.com

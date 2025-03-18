@@ -9,13 +9,11 @@ class ContactController < ActionController::API
   end
 
   def delete
-    params.require(:email)
-    Contact.find_by(email: params[:email])&.destory
+    Contact.find_by(email: params.require(:email))&.destory
     render json: { reponse: "OK" }
   end
 
   def search
-    params.require(:name)
-    render json: { data: Contact.where("name LIKE ?", "%#{params.require(:name)}%") }
+    render json: { data: Contact.search(params.require(:name)) }
   end
 end

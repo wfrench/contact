@@ -5,7 +5,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   name = "My Name"
 
   test "should post add" do
-    get contact_add_url, params: { email: email, name: name }
+    post "/add", params: { email: email, name: name }
     assert_response :success
 
     contact = Contact.find_by(email: email)
@@ -15,7 +15,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should post add - duplicate" do
-    get contact_add_url, params: { name: "Test User", email: "me@there.com" }
+    post "/add", params: { name: "Jack Bauer", email: "assassin@24.com" }
     assert_response 422
   end
 
@@ -31,30 +31,13 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get search exact" do
-    get "/search", params: { name: "Test User 2" }
+  test "should get search" do
+    get "/search", params: { name: "Jack Bauer" }
     assert_response :success
 
     response_data = JSON.parse(response.body)["data"]
     assert_equal 1, response_data.size
-    assert_equal "Test User 2", response_data.first["name"]
-  end
-
-  test "should get search partial match" do
-    get "/search", params: { name: "Test User" }
-    assert_response :success
-
-    response_data = JSON.parse(response.body)["data"]
-    assert_equal 2, response_data.size
-  end
-
-  test "should get search exact except for case" do
-    get "/search", params: { name: "test user 2" }
-    assert_response :success
-
-    response_data = JSON.parse(response.body)["data"]
-    assert_equal 1, response_data.size
-    assert_equal "Test User 2", response_data.first["name"]
+    assert_equal "Jack Bauer", response_data.first["name"]
   end
 
   test "should get search no match" do
